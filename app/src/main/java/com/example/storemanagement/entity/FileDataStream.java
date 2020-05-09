@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 public class FileDataStream {
 
-
     private Context context;
-    private ArrayList<Clothes> clothes = new ArrayList<Clothes>();
+    private ArrayList<Shelf> shelves = new ArrayList<Shelf>();
 
     public FileDataStream(Context context) {
         this.context = context;
@@ -25,12 +24,12 @@ public class FileDataStream {
         this.context = context;
     }
 
-    public ArrayList<Clothes> getGoods() {
-        return clothes;
+    public ArrayList<Shelf> getShelves() {
+        return shelves;
     }
 
-    public void setBooks(ArrayList<Clothes> clothes) {
-        this.clothes = clothes;
+    public void setShelves(ArrayList<Shelf> shelves) {
+        this.shelves = shelves;
     }
 
     //保存数据
@@ -43,23 +42,23 @@ public class FileDataStream {
             outputStream = new ObjectOutputStream(
                     context.openFileOutput("Storemangement.txt", Context.MODE_PRIVATE)
             );
-            outputStream.writeObject(clothes);
+            outputStream.writeObject(shelves);
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Clothes> load() {
+    public ArrayList<Shelf> load() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(
                     context.openFileInput("Serializable.txt")
             );
-            clothes = (ArrayList<Clothes>) inputStream.readObject();
+            shelves = (ArrayList<Shelf>) inputStream.readObject();
             inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return clothes;
+        return shelves;
     }
 }
