@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class NotificationsFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
     public static ArrayList<Inventory> inventoryArrayList = new ArrayList<>();
     private Store ware = new Store();
 
@@ -108,7 +107,6 @@ public class NotificationsFragment extends Fragment {
                 tv_clothes_Id_show.setVisibility(View.INVISIBLE);
                 tv_rest_number.setVisibility(View.INVISIBLE);
                 btn_edit.setVisibility(View.INVISIBLE);
-                btn_edit.setVisibility(View.INVISIBLE);
 
                 et_clothes_id.setText(clothes.getId());
                 et_clothes_number.setText(clothes.getNumber() + "");
@@ -137,8 +135,7 @@ public class NotificationsFragment extends Fragment {
                     }
                 } else {
                     //更新记录
-                    int result = userDao.deleteClothes(curId);
-                    result = userDao.updateClothes(clothes.getId(), curId, curNumber);
+                    int result = userDao.updateClothes(clothes.getId(), curId, curNumber);
                     if (result == 0) {
                         Toast.makeText(view.getContext(), "更改失败", Toast.LENGTH_SHORT).show();
                     } else {
@@ -159,6 +156,20 @@ public class NotificationsFragment extends Fragment {
                             //保存修改记录
                             inventoryArrayList.add(inventory);
                         }
+
+                        String id = clothes.getId();
+                        tv_clothes_Id_show.setText(id);
+                        tv_rest_number.setText(clothes.getNumber() + "");
+
+                        view.findViewById(R.id.tv_result).setVisibility(View.VISIBLE);
+                        tv_clothes_Id_show.setVisibility(View.VISIBLE);
+                        tv_rest_number.setVisibility(View.VISIBLE);
+                        btn_edit.setVisibility(View.VISIBLE);
+
+                        et_clothes_id.setVisibility(View.INVISIBLE);
+                        et_clothes_number.setVisibility(View.INVISIBLE);
+                        view.findViewById(R.id.tv_edit).setVisibility(View.INVISIBLE);
+                        btn_confirm.setVisibility(View.INVISIBLE);
                     }
                 }
             }
