@@ -1,8 +1,6 @@
-package com.example.storemanagement.ui.home;
+package com.example.storemanagement.ui.search;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,26 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.storemanagement.Conn;
-import com.example.storemanagement.JdbcUtil;
 import com.example.storemanagement.R;
 import com.example.storemanagement.UserDao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Set;
 
-public class HomeFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private String Id;
@@ -50,7 +37,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_home, container, false);
+        final View view = inflater.inflate(R.layout.fragment_search, container, false);
         et_Id = view.findViewById(R.id.et_search_input_id);
         btn_confirm = view.findViewById(R.id.btn_search_id);
 

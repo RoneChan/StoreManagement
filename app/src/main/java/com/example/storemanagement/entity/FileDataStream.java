@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class FileDataStream {
 
     private Context context;
-    private ArrayList<Shelf> shelves = new ArrayList<Shelf>();
+    private ArrayList<Order> orderArrayList = new ArrayList<Order>();
 
     public FileDataStream(Context context) {
         this.context = context;
@@ -24,12 +24,12 @@ public class FileDataStream {
         this.context = context;
     }
 
-    public ArrayList<Shelf> getShelves() {
-        return shelves;
+    public ArrayList<Order> getShelves() {
+        return orderArrayList;
     }
 
-    public void setShelves(ArrayList<Shelf> shelves) {
-        this.shelves = shelves;
+    public void setShelves(ArrayList<Order> orderArrayList) {
+        this.orderArrayList = orderArrayList;
     }
 
     //保存数据
@@ -40,25 +40,25 @@ public class FileDataStream {
         try {
             //写入文件
             outputStream = new ObjectOutputStream(
-                    context.openFileOutput("Storemangement.txt", Context.MODE_PRIVATE)
+                    context.openFileOutput("OrderLists.txt", Context.MODE_PRIVATE)
             );
-            outputStream.writeObject(shelves);
+            outputStream.writeObject(orderArrayList);
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Shelf> load() {
+    public ArrayList<Order> load() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(
-                    context.openFileInput("Serializable.txt")
+                    context.openFileInput("OrderLists.txt")
             );
-            shelves = (ArrayList<Shelf>) inputStream.readObject();
+            orderArrayList = (ArrayList<Order>) inputStream.readObject();
             inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return shelves;
+        return orderArrayList;
     }
 }

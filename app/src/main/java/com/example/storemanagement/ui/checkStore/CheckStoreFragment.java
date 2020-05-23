@@ -1,4 +1,4 @@
-package com.example.storemanagement.ui.notifications;
+package com.example.storemanagement.ui.checkStore;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.storemanagement.R;
 import com.example.storemanagement.UserDao;
@@ -24,7 +21,7 @@ import com.example.storemanagement.entity.Store;
 
 import java.util.ArrayList;
 
-public class NotificationsFragment extends Fragment {
+public class CheckStoreFragment extends Fragment {
 
     public static ArrayList<Inventory> inventoryArrayList = new ArrayList<>();
     private Store ware = new Store();
@@ -45,7 +42,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_notifications, container, false);
+        view = inflater.inflate(R.layout.fragment_check_store, container, false);
 
         et_search_shelf = view.findViewById(R.id.et_search_shelf);
         et_search_piles = view.findViewById(R.id.et_search_plies);
@@ -73,9 +70,16 @@ public class NotificationsFragment extends Fragment {
                 }
 
                 try {
+                    //Shelf s =  ware.getShelves().get(shelf);  //获取货架
+                    //clothes = s.getPiles().get(piles);  //获取架位
                     clothes = ware.getShelves().get(shelf).getPiles().get(Integer.parseInt(piles));
                 }catch (Exception e){
-                    Toast.makeText(view.getContext(), "该位置上无货物/无该位置", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "该位置上无该位置", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(clothes==null){
+                    Toast.makeText(view.getContext(), "该位置上无货物", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
@@ -83,19 +87,8 @@ public class NotificationsFragment extends Fragment {
                 tv_clothes_Id_show.setText(id);
                 tv_rest_number.setText(clothes.getNumber() + "");
 
-                view.findViewById(R.id.imageView2).setVisibility(View.VISIBLE);
-                view.findViewById(R.id.tv_result).setVisibility(View.VISIBLE);
-                view.findViewById(R.id.tv_clothes_id).setVisibility(View.VISIBLE);
-                tv_clothes_Id_show.setVisibility(View.VISIBLE);
-                view.findViewById(R.id.tv_clothes_rest).setVisibility(View.VISIBLE);
-                tv_rest_number.setVisibility(View.VISIBLE);
-                btn_edit.setVisibility(View.VISIBLE);
-
-                et_clothes_id.setVisibility(View.INVISIBLE);
-                et_clothes_number.setVisibility(View.INVISIBLE);
-                view.findViewById(R.id.tv_edit).setVisibility(View.INVISIBLE);
-                btn_confirm.setVisibility(View.INVISIBLE);
-
+                InvisibleEdit();
+                VisibleGoodShow();
             }
         });
 
@@ -103,18 +96,10 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                view.findViewById(R.id.tv_result).setVisibility(View.INVISIBLE);
-                tv_clothes_Id_show.setVisibility(View.INVISIBLE);
-                tv_rest_number.setVisibility(View.INVISIBLE);
-                btn_edit.setVisibility(View.INVISIBLE);
-
+                 InvisibleGoodShow();
                 et_clothes_id.setText(clothes.getId());
                 et_clothes_number.setText(clothes.getNumber() + "");
-
-                et_clothes_id.setVisibility(View.VISIBLE);
-                et_clothes_number.setVisibility(View.VISIBLE);
-                view.findViewById(R.id.tv_edit).setVisibility(View.VISIBLE);
-                btn_confirm.setVisibility(View.VISIBLE);
+                VisibleEdit();
             }
         });
 
@@ -161,20 +146,61 @@ public class NotificationsFragment extends Fragment {
                         tv_clothes_Id_show.setText(id);
                         tv_rest_number.setText(clothes.getNumber() + "");
 
-                        view.findViewById(R.id.tv_result).setVisibility(View.VISIBLE);
-                        tv_clothes_Id_show.setVisibility(View.VISIBLE);
-                        tv_rest_number.setVisibility(View.VISIBLE);
-                        btn_edit.setVisibility(View.VISIBLE);
-
-                        et_clothes_id.setVisibility(View.INVISIBLE);
-                        et_clothes_number.setVisibility(View.INVISIBLE);
-                        view.findViewById(R.id.tv_edit).setVisibility(View.INVISIBLE);
-                        btn_confirm.setVisibility(View.INVISIBLE);
+                        InvisibleEdit();
+                        VisibleGoodShow();
                     }
                 }
             }
         });
 
         return view;
+    }
+
+    void InvisibleGoodShow(){
+        view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_result).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_clothes_id).setVisibility(View.INVISIBLE);
+        tv_clothes_Id_show.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_clothes_rest).setVisibility(View.INVISIBLE);
+        tv_rest_number.setVisibility(View.INVISIBLE);
+        btn_edit.setVisibility(View.INVISIBLE);
+    }
+
+    void VisibleGoodShow(){
+        view.findViewById(R.id.imageView2).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_result).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_id).setVisibility(View.VISIBLE);
+        tv_clothes_Id_show.setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_rest).setVisibility(View.VISIBLE);
+        tv_rest_number.setVisibility(View.VISIBLE);
+        btn_edit.setVisibility(View.VISIBLE);
+
+        view.findViewById(R.id.imageView2).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_result).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_id).setVisibility(View.VISIBLE);
+        tv_clothes_Id_show.setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_rest).setVisibility(View.VISIBLE);
+        tv_rest_number.setVisibility(View.VISIBLE);
+        btn_edit.setVisibility(View.VISIBLE);
+    }
+
+    void InvisibleEdit(){
+        view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_edit).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_clothes_id).setVisibility(View.INVISIBLE);
+        et_clothes_id.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.tv_clothes_rest).setVisibility(View.INVISIBLE);
+        et_clothes_number.setVisibility(View.INVISIBLE);
+        btn_confirm.setVisibility(View.INVISIBLE);
+    }
+
+    void VisibleEdit(){
+        view.findViewById(R.id.imageView2).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_edit).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_id).setVisibility(View.VISIBLE);
+        et_clothes_id.setVisibility(View.VISIBLE);
+        view.findViewById(R.id.tv_clothes_rest).setVisibility(View.VISIBLE);
+        et_clothes_number.setVisibility(View.VISIBLE);
+        btn_confirm.setVisibility(View.VISIBLE);
     }
 }

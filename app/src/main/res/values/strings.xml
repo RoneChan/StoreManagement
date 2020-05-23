@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">StoreManagement</string>
     <string name="title_search">查询</string>
-    <string name="title_dashboard">盘点</string>
-    <string name="title_notifications">盘点</string>
+    <string name="title_order">拣货</string>
+    <string name="title_check_ware">盘点</string>
     <string name="title_other">其他</string>
 
     <!-- TODO: Remove or change this placeholder text -->
