@@ -1,9 +1,12 @@
 package com.example.storemanagement;
 
 import android.util.Log;
+import android.util.Pair;
 
 import com.example.storemanagement.entity.Clothes;
 import com.example.storemanagement.entity.ClothesFactory;
+import com.example.storemanagement.entity.Info;
+import com.example.storemanagement.entity.Order;
 import com.example.storemanagement.entity.Shelf;
 import com.example.storemanagement.entity.Store;
 
@@ -13,6 +16,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static android.content.ContentValues.TAG;
 
@@ -111,4 +118,32 @@ public class UserDao {
         }
         return result;
     }
+
+    public Map<String, Info> getPositions(Order order){
+        Map<String, Info> result = new TreeMap<>(); //Map< id, Map<positon,restNumber>>
+        try {
+            Connection c = jdbcUtil.createConnection();
+            Statement stmt = c.createStatement();
+            for(int i=0;i<order.getOderList().size();i++){
+                String id = order.getOderList().get(i).getId();
+                int needNumber = order.getOderList().get(i).getNumber();
+                String sql = "select * from ware,clothes where ware.ID='"+id+"' and ware.ID=clothes.ID order by Shelf;";
+                ResultSet res = stmt.executeQuery(sql);
+                while (res.next()) {
+                    String shelfName = res.getNString("Shelf");
+                    int position = res.getInt("position");
+                    String pos = shelfName+"-"+position;
+                    int number = res.getInt("RestNumber");
+                    //result.put(id,new Pair<>(pos, number));
+                    result.put(pos,new Info(id,pos,number,needNumber));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }
+

@@ -21,6 +21,7 @@ public class Clothes implements Serializable,Product{
         this.id = id;
     }
 
+    @Override
     public int getNumber() {
         return number;
     }

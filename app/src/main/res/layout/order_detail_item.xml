@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/front_layout"
+        android:id="@+id/front_layout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
@@ -19,16 +19,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/ll_id_input"
+            android:id="@+id/ll_order_detail_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/front_layout"
             app:layout_constraintStart_toStartOf="@+id/front_layout"
-            app:layout_constraintTop_toTopOf="@+id/front_layout">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_detail_id"
@@ -38,53 +38,60 @@
                 android:text="服装ID："
                 android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/et_clothes_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:ems="10"
-                android:hint="输入服装ID"
-                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_number_input"
-            android:layout_width="377dp"
-            android:layout_height="59dp"
+            android:id="@+id/ll_order_detail_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/front_layout"
+            app:layout_constraintStart_toStartOf="@+id/front_layout2"
+            app:layout_constraintTop_toBottomOf="@+id/ll_order_detail_id">
+
+
+        <TextView
+                android:id="@+id/tv_detail_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="数量:"
+                android:textSize="18dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_order_detail_position"
+            android:layout_width="378dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/ll_id_input"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/front_layout"
-            app:layout_constraintStart_toStartOf="@+id/front_layout"
-            app:layout_constraintTop_toBottomOf="@+id/ll_id_input">
+            app:layout_constraintStart_toStartOf="@+id/front_layout2"
+            app:layout_constraintTop_toBottomOf="@+id/ll_order_detail_number">
 
             <TextView
                 android:id="@+id/tv_detail_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="数 量:"
+                android:layout_weight="2"
+                android:text="位置:"
                 android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/et_clothes_number"
-                android:layout_width="176dp"
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:ems="10"
-                android:hint="输入数量"
-                android:inputType="textPersonName" />
+                android:layout_weight="1"
+                android:text="已拣" />
 
-            <Button
-                android:id="@+id/btn_remove"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="删除"
-                android:textSize="18sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

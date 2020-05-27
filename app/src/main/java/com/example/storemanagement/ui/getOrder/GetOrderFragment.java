@@ -29,6 +29,7 @@ public class GetOrderFragment extends Fragment {
     OrderAdapter adapter;
     FileDataStream fileDataStream;
     ListView lv_order;
+    TextView tv_no_order;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +37,10 @@ public class GetOrderFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_get_order, container, false);
 
+        fileDataStream =new FileDataStream(getContext());
+        orderArrayList=fileDataStream.load();
         if(orderArrayList.size() == 0){
+            view.findViewById(R.id.tv_no_order).setVisibility(View.VISIBLE);
 
         }else {
             lv_order = view.findViewById(R.id.lv_order_show);
